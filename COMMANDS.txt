@@ -1,0 +1,242 @@
+ 77  conda create -n wineq_study python=3.8 -y
+   78  conda activate wineq_study
+   79  touch requirements.txt
+   80  pip install -r requirements.txt 
+   81  ls
+   82  python template.py
+   83  cd ..
+   84  ls
+   85  git init
+   86  dvc init
+   
+      download 
+
+https://drive.google.com/drive/folders/18zqQiCJVgF7uzXgfbIJ-04zgz1ItNfF5?usp=sharing
+
+
+   87  dvc add data_given/winequality.csv 
+   88  git add .
+   89  git status 
+   90  git commit -m "first commit"
+   91  git remote add origin https://github.com/vishymails/CASESTUDY1_MLOPS.git
+   92  git branch -M main
+   93  git push -u origin main
+   94  history
+
+
+   create get_data.py
+   create load_data.py
+
+
+    110  python src/get_data.py 
+  111  python src/get_data.py 
+  112  python src/load_data.py 
+  113  python src/load_data.py 
+  114  git add .
+  115  git commit -m "load_data  commit"
+  116  git push -u origin main
+  117  dvc repro
+  118  dvc repro
+  119  dvc repro
+  120  git commit -m "load_data  commit"
+
+update dvc.yaml
+
+
+create split_data.py
+
+
+130  python src/split_data.py 
+  131  git add .
+  132  git commit -m "splitdata.py  commit"
+  133  git push -u origin main
+  134* 
+  135  dvc repro
+  136  dvc repro
+  137  git add .
+  138  git commit -m "splitdata.py  commit"
+  139  dvc repro
+  140  git add .
+  141  git commit -m "stage 2  commit"
+  142  git push -u origin main
+
+
+
+create train_and_evaluate.py
+
+143  python src/train_and_evaluate.py 
+  144  python src/train_and_evaluate.py 
+  145  git add .
+  146  git commit -m "train and evaluate  commit"
+  147  git push -u origin main
+  148  git push -u origin main
+  149  python src/train_and_evaluate.py 
+  150  mkdir report
+  151  cd report
+  152  touch params.json
+  153  touch scores.json
+  154  cd ..
+  155  python src/train_and_evaluate.py 
+
+update dvc.yaml
+
+add stage for train_and_evaluate 
+
+ 171  dvc repro
+  172  dvc metrics diff
+  
+  make some value changes to alpha and l1_ratio in params.yaml 
+
+  174  dvc metrics show 
+  175  dvc metrics diff
+  
+  TRY ANOTHER TIME 
+
+  176  dvc repro
+  177  dvc metrics diff
+  178  dvc metrics show 
+  
+  TRY ANOTHER TIME 
+
+  179  dvc repro
+  180  dvc metrics diff
+  181  dvc metrics show 
+  184  dvc params diff
+
+
+ git add . && git commit -m "test multi commands in git" && git push -u origin main
+
+
+
+ test
+
+
+TEST CASE 
+
+pytest
+
+file name has convention 
+
+test_<name>.py
+<name>_test.py
+
+fixture - pointcuts 
+
+BEFORE ANY TEST METHOD YOU CAN EXECUTE FIXTURE 
+test method 
+
+
+FIXTURE CAN COME IN TEST FILE BUT IT IS ACCESSIBLE ONLY FOR THAT TEST CASE 
+IF YOU WANT TO USE FIXTURE IN MULTIPLE TEST CASE FILES 
+CREATE CONFTEST.PY AND CREATE A;LL GENERIC FIXTURE 
+
+
+201  tox
+  202  mkdir tests
+  203  touch tests/conftest.py tests/test_config.py
+  206  touch tests/__init__.py
+  207  pytest -v
+  208  tox
+  209  pytest -v
+  210   git add . && git commit -m "generic test case added" && git push -u origin main
+
+
+    213  touch setup.py
+  214  pip install -e .
+
+  create egg-info folder 
+
+
+  215  pip freeze
+  
+  final packages used for the project execution and packaging so u can use in container or any env creation 
+
+
+below command will create your own env 
+
+  216  python setup.py sdist bdist_wheel
+  
+  creates dist folder and places archive 
+
+  217  tox
+  
+  
+  comment 
+
+  ; skipsdist = True
+
+; - symbol for comment
+
+uses setup.py and archives the project structure and deploys it in test env for testing.
+
+
+AUTOMATE YOUR NEWLY CREATED ENV TO GET INSTALLED WHEN PROJECT IS DEPLOYED OR ENV IS GETTING CREATED 
+
+-e . 
+
+to be added in requirements.txt
+
+
+
+create condition for value testing 
+
+ 223  pip install jupyterlab
+  224  jupyter-lab notebooks/
+
+
+  follow untitled.ipynb 
+
+
+  225  tox
+
+227   git add . && git commit -m "notebook added " && git push -u origin main
+  228  tox
+  229   git add . && git commit -m "flake configued in tox.ini  added " && git push -u origin main
+
+
+
+
+231  mkdir -p prediction_service/model
+  232  touch app.py
+  233  touch prediction_service/__init__.py
+  234  touch prediction_service/prediction.py
+  235   git add . && git commit -m "prediction service added " && git push -u origin main
+
+
+
+   241  python app.py
+  242   git add . && git commit -m "app py added " && git push -u origin main
+  243  python app.py
+  244   git add . && git commit -m "app py updated prediction.py updated  " && git push -u origin main
+  245  history
+
+
+  python app.py
+  247   git add . && git commit -m "api service added  " && git push -u origin main
+
+  python app.py 
+  in ARC / Postman : http://localhost:5000 (POST) application/json
+
+  BODY 
+
+  {
+  "fixed acidity" : 67677, 
+  "volatile acidity" : 555,
+  "citric acid" : 99,
+  "residual sugar" : 99,
+  "chlorides" : 12,
+  "free sulfur dioxide" : 789,
+  "total sulfur dioxide" : 75,
+  "density" : 2,
+  "pH" : 33,
+  "sulphates" : 9,
+  "alcohol" : 9
+}
+
+257   git add . && git commit -m "github actions updated  " && git push -u origin main
+  258   git add . && git commit -m "github actions updated  " && git push -u origin main
+  259   git add . && git commit -m "github actions updated final  " && git push -u origin main
+  260  touch Procfile
+  261   git add . && git commit -m "github actions updated final  " && git push -u origin main
+  262   git add . && git commit -m "github actions updated final  " && git push -u origin main
+  263  history
